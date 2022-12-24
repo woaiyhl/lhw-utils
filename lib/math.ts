@@ -25,7 +25,7 @@ export const randomUniqueIntArrInRange = (min: number, max: number, n = 1): numb
 /**
  * 保留n位小数，四舍五入不补0
  */
-const round = (num: number, n: number = 2): number => {
+export const round = (num: number, n: number = 2): number => {
   return Math.round(parseFloat(String(num)) * Math.pow(10, n)) / (Math.pow(10, n))
 }
 
@@ -103,4 +103,40 @@ export const digitUppercase = (n: number): string => {
   return s.replace(/(零.)*零元/, '元')
     .replace(/(零.)+/g, '零')
     .replace(/^整$/, '零元整');
+};
+
+/**
+ * 匹配正整数
+ * @param val 
+ * @returns 
+ */
+export const isPositiveNum = (val:number | string):boolean => {
+	return /^[1-9]\d*$/.test(String(val));
+};
+
+/**
+ * 匹配负整数
+ * @param val 
+ * @returns 
+ */
+export const isNegativeNum = (val:number | string):boolean => {
+  return /^-[1-9]\d*$/.test(String(val));
+};
+
+/**
+ * 匹配整数
+ * @param val 
+ * @returns 
+ */
+export const isInteger = (val:number | string):boolean => {
+	return /^(-|\+)?\d+$/.test(String(val));
+};
+
+/**
+ * 匹配非负浮点数
+ * @param val 
+ * @returns 
+ */
+export const isNotNegativeFloatNum = (val:number | string):boolean => {
+	return /^\d+(\.\d+)?$/.test(String(val));
 };
