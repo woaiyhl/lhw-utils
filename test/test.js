@@ -1,10 +1,20 @@
 'use strict';
 const expect = require('chai').expect;
-const randomUniqueIntArrInRange = require('../dist/index').randomUniqueIntArrInRange;
- 
+const { uniqueDeep,unique } = require('../dist/index');
+
 describe('ts-hi function test', () => {
   it('should return 2', () => {
-    const result = randomUniqueIntArrInRange(1, 10);
-    console.log(result);
+    let arr = [
+      {
+        a: 1
+      },
+      {
+        a:1
+      },{
+        a:2
+      }
+    ]
+    console.log(uniqueDeep(arr));
   });
 });
+

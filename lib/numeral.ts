@@ -110,8 +110,8 @@ export const digitUppercase = (n: number): string => {
  * @param val 
  * @returns 
  */
-export const isPositiveNum = (val:number | string):boolean => {
-	return /^[1-9]\d*$/.test(String(val));
+export const isPositiveNum = (val: number | string): boolean => {
+  return /^[1-9]\d*$/.test(String(val));
 };
 
 /**
@@ -119,7 +119,7 @@ export const isPositiveNum = (val:number | string):boolean => {
  * @param val 
  * @returns 
  */
-export const isNegativeNum = (val:number | string):boolean => {
+export const isNegativeNum = (val: number | string): boolean => {
   return /^-[1-9]\d*$/.test(String(val));
 };
 
@@ -128,8 +128,8 @@ export const isNegativeNum = (val:number | string):boolean => {
  * @param val 
  * @returns 
  */
-export const isInteger = (val:number | string):boolean => {
-	return /^(-|\+)?\d+$/.test(String(val));
+export const isInteger = (val: number | string): boolean => {
+  return /^(-|\+)?\d+$/.test(String(val));
 };
 
 /**
@@ -137,6 +137,26 @@ export const isInteger = (val:number | string):boolean => {
  * @param val 
  * @returns 
  */
-export const isNotNegativeFloatNum = (val:number | string):boolean => {
-	return /^\d+(\.\d+)?$/.test(String(val));
+export const isNotNegativeFloatNum = (val: number | string): boolean => {
+  return /^\d+(\.\d+)?$/.test(String(val));
 };
+
+/**
+ * 千分位逗号隔开 (金钱格式化)
+ * @param num 
+ * @returns 
+ * 11122233.4356 -> 11,222,333.4356 (不会影响小数)
+ */
+export const toThousandFilter = (num: number | string): string => {
+  return (+num || 0).toString().replace(/^-?\d+/g, m => m.replace(/(?=(?!\b)(\d{3})+$)/g, ','))
+}
+
+/**
+ * 有小数的，保留n位，不够补0,千分位逗号隔开 (金钱格式化)
+ * @param num 
+ * @returns 
+ * 11122233.4356 -> 11,222,333.44
+ */
+export const roundToThousandFilter = (num: number): string => roundWithZero(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+

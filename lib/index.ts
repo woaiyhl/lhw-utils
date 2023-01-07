@@ -1,2 +1,6 @@
-export * from './math'
+export * from './numeral'
 export * from './string'
+export * from './judge'
+export * from './time'
+export * from './array'
+export * from './common'
