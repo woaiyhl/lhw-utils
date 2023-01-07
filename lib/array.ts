@@ -1,3 +1,5 @@
+import { isEqual,uniqWith } from 'lodash'
+
 /**
  * 数组分割
  * 
@@ -68,4 +70,16 @@ export const nest = (items: any[], id = null, link = 'parent_id'): any[] =>
     .filter(item => item[link] === id)
     .map(item => ({ ...item, children: nest(items, item.id) }));
 
+/**
+ * 基本数据类型严格去重
+ * @param arr 
+ * @returns 
+ */
 export const unique = <T>(arr: T[]):T[] => [...new Set(arr)]
+
+/**
+ * 复杂去重
+ * @param arr 
+ * @returns 
+ */
+ export const uniqueDeep = <T>(arr:T[]):T[] => uniqWith(arr,isEqual)
