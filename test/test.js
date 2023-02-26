@@ -1,11 +1,18 @@
 'use strict';
 const expect = require('chai').expect;
-const { getQueryObject } = require('../dist/index');
+const { deleteInvalid, deletePrimitiveInvalid, isEmpty } = require('../dist/index');
 
 describe('ts-hi function test', () => {
   it('should return 2', () => {
-    let url = 'http://www.woaiyhl.com?name=lhw&age=12'
-    console.log(getQueryObject(url))
+    let obj = {
+      b: 0,
+      c: false,
+      d: null,
+      e: undefined,
+      f: [],
+      g: {}
+    }
+    console.log(deletePrimitiveInvalid(obj))
   });
 });
 

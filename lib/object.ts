@@ -1,8 +1,7 @@
+import { isEmpty } from './judge'
 /**
- * 
- * @param url 
- * @returns 
  * http:www.woaini.com?name=lhw&age=12
+ * 
  * getQueryObject(url)	 // { name: 'lhw',age: '12' }
  */
 export function getQueryObject(url: string | undefined):Record<string,string> {
@@ -18,4 +17,50 @@ export function getQueryObject(url: string | undefined):Record<string,string> {
     return rs
   })
   return obj
+}
+
+/**
+ * 
+ * objectToQueryString({ page: '1', size: '2kg', key: undefined });
+ * 
+ * ?page=1&size=2kg'
+ *
+ */
+export const objectToQueryString = (queryParameters: Record<string,any> | undefined):string => {
+  return queryParameters
+    ? Object.entries(queryParameters).reduce((queryString, [key, val], index) => {
+        const symbol = queryString.length === 0 ? '?' : '&';
+        queryString += typeof val === 'string' ? `${symbol}${key}=${val}` : '';
+        return queryString;
+      }, '')
+    : '';
+};
+
+
+/**
+ * 
+ * 传入一个对象，删除对象里面值为null、undefined,''的这些无效的字段
+ * 在业务中，数字0和布尔false属于有效值
+ */
+export const deletePrimitiveInvalid = (obj:Record<string,any>):Record<string,any> => {
+	Object.keys(obj).forEach(k => {
+	    if (!obj[k] && obj[k] !== 0 && obj[k] !== false) {
+	        delete obj[k]
+	    }
+    })
+	return obj;
+}
+
+/**
+ * 
+ * 传入一个对象，删除对象里面值为null、undefined,'',[],{} 的这些无效的字段
+ * 在业务中，数字0和布尔false属于有效值
+ */
+export const deleteInvalid = (obj:Record<string,any>):Record<string,any> => {
+	Object.keys(obj).forEach(k => {
+	    if (isEmpty(obj[k])) {
+	        delete obj[k]
+	    }
+    })
+	return obj;
 }
