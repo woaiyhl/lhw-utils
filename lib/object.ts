@@ -1,4 +1,5 @@
 import { isEmpty } from './judge'
+import { cloneDeep } from 'lodash'
 /**
  * http:www.woaini.com?name=lhw&age=12
  * 
@@ -43,12 +44,13 @@ export const objectToQueryString = (queryParameters: Record<string,any> | undefi
  * 在业务中，数字0和布尔false属于有效值
  */
 export const deletePrimitiveInvalid = (obj:Record<string,any>):Record<string,any> => {
-	Object.keys(obj).forEach(k => {
-	    if (!obj[k] && obj[k] !== 0 && obj[k] !== false) {
-	        delete obj[k]
+  let deepCloneObj = cloneDeep(obj)
+	Object.keys(deepCloneObj).forEach(k => {
+	    if (!deepCloneObj[k] && deepCloneObj[k] !== 0 && deepCloneObj[k] !== false) {
+	        delete deepCloneObj[k]
 	    }
     })
-	return obj;
+	return deepCloneObj;
 }
 
 /**
@@ -57,10 +59,11 @@ export const deletePrimitiveInvalid = (obj:Record<string,any>):Record<string,any
  * 在业务中，数字0和布尔false属于有效值
  */
 export const deleteInvalid = (obj:Record<string,any>):Record<string,any> => {
-	Object.keys(obj).forEach(k => {
-	    if (isEmpty(obj[k])) {
-	        delete obj[k]
+  let deepCloneObj = cloneDeep(obj)
+	Object.keys(deepCloneObj).forEach(k => {
+	    if (isEmpty(deepCloneObj[k])) {
+	        delete deepCloneObj[k]
 	    }
     })
-	return obj;
+	return deepCloneObj;
 }
