@@ -110,7 +110,7 @@ export const digitUppercase = (n: number): string => {
  * @param val 
  * @returns 
  */
-export const isPositiveNum = (val: number | string): boolean => {
+export const isPositiveInteger = (val: number | string): boolean => {
   return /^[1-9]\d*$/.test(String(val));
 };
 
@@ -119,8 +119,17 @@ export const isPositiveNum = (val: number | string): boolean => {
  * @param val 
  * @returns 
  */
-export const isNegativeNum = (val: number | string): boolean => {
+export const isNegativeInteger = (val: number | string): boolean => {
   return /^-[1-9]\d*$/.test(String(val));
+};
+
+/**
+ * 匹配非负整数
+ * @param val 
+ * @returns 
+ */
+export const isNotNegativeInteger = (val: number | string): boolean => {
+  return /^([1-9][0-9]*|0)$/.test(String(val));
 };
 
 /**
