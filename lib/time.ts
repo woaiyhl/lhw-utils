@@ -77,7 +77,7 @@ export const timeFormat = (timeStr = '20201202', operator = '-') => {
 export const getColonTimeFromDate = (date: Date): string => date.toTimeString().slice(0, 8);
 
 /**
- * 当前当前时间在一年的第几天
+ * 当前时间在一年的第几天
  * 
  */
 export const dayOfYear = (date: any = new Date()): number => Math.floor((date - new Date(date.getFullYear(), 0, 0).getTime()) / 1000 / 60 / 60 / 24);
